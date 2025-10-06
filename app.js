@@ -1,5 +1,6 @@
 class UltimateTicTacToe {
     constructor() {
+        this.names = this.getPlayerNames();
         this.currentPlayer = 'X';
         this.bigBoard = Array(9).fill(null);
         this.smallBoards = Array(9).fill(null).map(() => Array(9).fill(null));
@@ -7,6 +8,14 @@ class UltimateTicTacToe {
         this.gameWon = false;
         this.initializeGame();
     }
+
+    
+getPlayerNames() {
+    const x = localStorage.getItem('playerXName') || 'Jogador X';
+    const o = localStorage.getItem('playerOName') || 'Jogador O';
+    return { x, o };
+}
+
 
     initializeGame() {
         const bigBoardElement = document.getElementById('bigBoard');
@@ -126,7 +135,11 @@ class UltimateTicTacToe {
     }
 
     updateDisplay() {
-        document.getElementById('currentPlayer').textContent = this.currentPlayer;
+        const nameEl = document.getElementById('currentPlayerName');
+        if (nameEl) {
+            const name = (this.currentPlayer === 'X') ? this.names.x : this.names.o;
+            nameEl.textContent = name;
+        }
 
         // Clear highlights
         document.querySelectorAll('.small-board').forEach(b => b.classList.remove('active'));
@@ -172,10 +185,27 @@ function resetGame() {
     const msg = document.getElementById('winnerMessage');
     if (msg) msg.innerHTML = '';
     startGame();
+const inline = document.getElementById('playersInline');
+if (inline) {
+    inline.innerHTML = `<div class="pill">X — ${game.names.x}</div><div class="pill">O — ${game.names.o}</div>`;
+}
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    const hasNames = localStorage.getItem('playerXName') && localStorage.getItem('playerOName');
+    if (!hasNames) {
+        // Se não tiver nomes, vai para a tela de configuração
+        window.location.replace('config.html');
+        return;
+    }
+
     startGame();
+const inline = document.getElementById('playersInline');
+if (inline) {
+    inline.innerHTML = `<div class="pill">X — ${game.names.x}</div><div class="pill">O — ${game.names.o}</div>`;
+}
+
     const resetBtn = document.getElementById('resetBtn');
     if (resetBtn) {
         resetBtn.addEventListener('click', resetGame);

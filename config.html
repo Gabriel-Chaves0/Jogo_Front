@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Configurar Jogadores — Ultimate Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="game-container">
+    <div class="game-header">
+      <h1 class="game-title">Ultimate Tic-Tac-Toe</h1>
+      <p class="instructions">Informe os nomes dos jogadores e clique em <strong>Iniciar Jogo</strong>.</p>
+    </div>
+
+    <form id="playerForm" class="form-box">
+      <div class="form-row">
+        <label for="playerX">Jogador X</label>
+        <input type="text" id="playerX" name="playerX" placeholder="Ex.: Gabriel (X)" required maxlength="30">
+      </div>
+      <div class="form-row">
+        <label for="playerO">Jogador O</label>
+        <input type="text" id="playerO" name="playerO" placeholder="Ex.: Yasmin (O)" required maxlength="30">
+      </div>
+
+      <div class="controls">
+        <button type="submit" class="reset-btn">Iniciar Jogo</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('playerForm');
+      const x = document.getElementById('playerX');
+      const o = document.getElementById('playerO');
+
+      // Preencher com últimos nomes usados (se houver)
+      const lastX = localStorage.getItem('playerXName');
+      const lastO = localStorage.getItem('playerOName');
+      if (lastX) x.value = lastX;
+      if (lastO) o.value = lastO;
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nameX = x.value.trim() || 'Jogador X';
+        const nameO = o.value.trim() || 'Jogador O';
+        localStorage.setItem('playerXName', nameX);
+        localStorage.setItem('playerOName', nameO);
+        // Vai para a página do jogo
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
+</body>
+</html>

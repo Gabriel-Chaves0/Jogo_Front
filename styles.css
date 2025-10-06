@@ -167,3 +167,39 @@ body {
   .game-title{ font-size: 1.4rem; }
   .cell{ min-height: 40px; font-size: 1.05rem; }
 }
+
+
+/* --- Config form --- */
+.form-box {
+  margin-top: 12px;
+  background: #0e1320;
+  border: 1px solid #1f2638;
+  border-radius: 12px;
+  padding: 16px;
+}
+.form-row { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
+.form-row label { font-weight:600; font-size:.95rem; color:#c8cbd3; }
+.form-row input {
+  background:#0b0f1a;
+  color:#e6e7ea;
+  border:1px solid #1c2436;
+  border-radius:8px;
+  padding:10px 12px;
+  outline:none;
+}
+.form-row input:focus { border-color:#2a3756; }
+
+.link-like { text-decoration:none; }
+
+/* Players inline */
+.players-inline {
+  display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;
+}
+.pill {
+  background:#0b0f1a;
+  border:1px solid #1c2436;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:.9rem;
+  color:#98a2b3;
+}

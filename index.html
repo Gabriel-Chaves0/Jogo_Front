@@ -11,21 +11,24 @@
     <div class="game-container">
         <div class="game-header">
             <h1 class="game-title">Ultimate Tic-Tac-Toe</h1>
-            <div class="game-status">
-                <span>Jogador atual: <span class="current-player" id="currentPlayer">X</span></span>
+            <div class="game-status name-row">
+                <span>Vez de: <span class="current-player" id="currentPlayerName">—</span></span>
             </div>
             <p class="instructions">
                 Ganhe jogos menores (3×3) para conquistar blocos do tabuleiro grande.
-                Sua jogada determina onde o próximo jogador deve jogar. Em caso de
+                Sua jogada direciona o próximo sub-tabuleiro. Em caso de
                 <strong>empate no 3×3</strong>, o bloco conta para <strong>X e O</strong>.
             </p>
             <div id="winnerMessage"></div>
         </div>
 
+        <div class="players-inline" id="playersInline"></div>
+
         <div class="big-board" id="bigBoard"></div>
 
         <div class="controls">
             <button class="reset-btn" id="resetBtn">Novo Jogo</button>
+            <a class="reset-btn link-like" href="config.html" style="margin-left:8px;">Trocar nomes</a>
         </div>
     </div>
 </body>
