@@ -1,65 +1,81 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ultimate Tic-Tac-Toe</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="styles.css" />
     <script src="app.js" defer></script>
-</head>
-<body>
+  </head>
+  <body>
     <div class="game-container">
-        <div class="game-header">
-            <h1 class="game-title">Ultimate Tic-Tac-Toe</h1>
-            <div class="game-status name-row">
-                <span>Vez de: <span class="current-player" id="currentPlayerName">—</span></span>
-            </div>
-            <p class="instructions">
-                Ganhe jogos menores (3×3) para conquistar blocos do tabuleiro grande.
-                Sua jogada direciona o próximo sub-tabuleiro. Em caso de
-                <strong>empate no 3×3</strong>, o bloco conta para <strong>X e O</strong>.
-            </p>
-            <div id="winnerMessage"></div>
+      <div class="game-header">
+        <h1 class="game-title">Ultimate Tic-Tac-Toe</h1>
+        <div class="game-status name-row">
+          <span
+            >Vez de:
+            <span class="current-player" id="currentPlayerName">—</span></span
+          >
         </div>
+        <p class="instructions">
+          Ganhe jogos menores (3×3) para conquistar blocos do tabuleiro grande.
+          Sua jogada direciona o próximo sub-tabuleiro. Em caso de
+          <strong>empate no 3×3</strong>, o bloco conta para
+          <strong>X e O</strong>.
+        </p>
+        <div id="winnerMessage"></div>
+      </div>
 
-        <div class="players-inline" id="playersInline"></div>
+      <div class="players-inline" id="playersInline"></div>
 
-        
-        <div class="main-grid">
-          <div class="board-col">
-            <div class="big-board" id="bigBoard"></div>
+      <div class="main-grid">
+        <div class="board-col">
+          <div class="big-board" id="bigBoard"></div>
+        </div>
+        <aside class="sidebar-col">
+          <div class="stats-card">
+            <h3 class="section-title">
+              Contagem de jogadas por sub-tabuleiro (1–9)
+            </h3>
+            <table id="moveTable" class="stats-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>X</th>
+                  <th>O</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- rows 1..9 via JS -->
+              </tbody>
+            </table>
           </div>
-          <aside class="sidebar-col">
-            <div class="stats-card">
-              <h3 class="section-title">Contagem de jogadas por sub-tabuleiro (1–9)</h3>
-              <table id="moveTable" class="stats-table">
-                <thead>
-                  <tr><th>#</th><th>X</th><th>O</th></tr>
-                </thead>
-                <tbody>
-                  <!-- rows 1..9 via JS -->
-                </tbody>
-              </table>
-            </div>
-          </aside>
-        </div>
-        
-        <div class="postgame" id="postGame" hidden>
-            <h2 class="section-title">Resultado</h2>
-            <div id="winnerLine" class="winner-line"></div>
-            <div class="scoreboards">
-                <div class="stats-block">
-                    <h3>Contagem de jogadas por sub-tabuleiro (1–9)</h3>
-                    <ul id="moveStats" class="stats-list"></ul>
-                </div>
-            </div>
-        </div>
+        </aside>
+      </div>
 
-
-        <div class="controls">
-            <button class="reset-btn" id="resetBtn">Novo Jogo</button>
-            <a class="reset-btn link-like" href="config.html" style="margin-left:8px;">Trocar nomes</a>
+      <!-- Modal de vitória -->
+      <div id="victoryModal" class="modal">
+        <div class="modal-content">
+          <h2 id="modalTitle">Parabéns!</h2>
+          <div id="modalMessage" class="modal-message"></div>
+          <div class="modal-buttons">
+            <button id="playAgainBtn" class="modal-btn primary">
+              Jogar Novamente
+            </button>
+            <a href="config.html" class="modal-btn secondary">Trocar Nomes</a>
+          </div>
         </div>
+      </div>
+
+      <div class="controls">
+        <button class="reset-btn" id="resetBtn">Novo Jogo</button>
+        <a
+          class="reset-btn link-like"
+          href="config.html"
+          style="margin-left: 8px"
+          >Trocar nomes</a
+        >
+      </div>
     </div>
-</body>
+  </body>
 </html>

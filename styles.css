@@ -425,3 +425,141 @@ body {
 .stats-table th {
   font-weight: 700;
 }
+
+/* Modal de vitória */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+}
+
+.modal.active {
+  display: flex;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: #0e1320;
+  border: 2px solid #2a3756;
+  border-radius: 14px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transform: translateY(0);
+  animation: slideUp 0.4s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #e6e7ea;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  letter-spacing: 0.5px;
+}
+
+.modal-content h2.winner-x {
+  color: #ef4444;
+}
+
+.modal-content h2.winner-o {
+  color: #3b82f6;
+}
+
+.modal-content h2.winner-draw {
+  color: #98a2b3;
+}
+
+.modal-message {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #111624;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-message.winner-x {
+  color: #ef4444;
+}
+
+.modal-message.winner-o {
+  color: #3b82f6;
+}
+
+.modal-message.winner-draw {
+  color: var(--muted);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.modal-btn {
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.modal-btn.primary {
+  background: #3b82f6;
+  color: white;
+  border: none;
+}
+
+.modal-btn.primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.modal-btn.secondary {
+  background: transparent;
+  color: #e6e7ea;
+  border: 1px solid #2a3756;
+}
+
+.modal-btn.secondary:hover {
+  background: #111624;
+  transform: translateY(-2px);
+}

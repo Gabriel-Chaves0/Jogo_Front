@@ -278,12 +278,54 @@ class UltimateTicTacToe {
   }
 
   showWinner(winner) {
-    const el = document.getElementById("winnerMessage");
+    // Marca que o jogo acabou
+    this.gameWon = true;
+
+    // Prepara dados para o modal
+    const names = this.names || { x: "Jogador X", o: "Jogador O" };
+    let message = "";
+    let titleClass = "";
+
     if (winner === "DRAW") {
-      el.innerHTML = '<div class="winner-message winner-draw">🤝 Empate!</div>';
+      message = "🤝 Jogo empatado!";
+      titleClass = "winner-draw";
     } else {
-      el.innerHTML =
-        '<div class="winner-message">🎉 Jogador ' + winner + " venceu!</div>";
+      const winnerName = winner === "X" ? names.x : names.o;
+      message = `🏆 ${winnerName} (${winner}) venceu o jogo!`;
+      titleClass = winner === "X" ? "winner-x" : "winner-o";
+    }
+
+    // Exibe estatísticas
+    this.renderStats(winner);
+
+    // Preenche o modal
+    const modalTitle = document.getElementById("modalTitle");
+    const modalMessage = document.getElementById("modalMessage");
+    const modalStats = document.getElementById("modalStats");
+
+    modalTitle.textContent = winner === "DRAW" ? "🤝 Empate!" : "🏆 Vitória!";
+    modalTitle.className = titleClass;
+
+    modalMessage.textContent = message;
+    modalMessage.className =
+      "modal-message " +
+      (winner === "DRAW"
+        ? "winner-draw"
+        : winner === "X"
+        ? "winner-x"
+        : "winner-o");
+
+    // Move as estatísticas para o modal
+    const statsContent = document.getElementById("moveStats");
+    if (statsContent) {
+      modalStats.innerHTML = "";
+      modalStats.appendChild(statsContent.cloneNode(true));
+    }
+
+    // Exibe o modal
+    const modal = document.getElementById("victoryModal");
+    if (modal) {
+      modal.classList.add("active");
     }
 
     document.querySelectorAll(".cell").forEach((c) => {
@@ -297,12 +339,21 @@ function startGame() {
   game = new UltimateTicTacToe();
 }
 function resetGame() {
+  // Fecha o modal de vitória
+  const modal = document.getElementById("victoryModal");
+  if (modal) {
+    modal.classList.remove("active");
+  }
+
+  // Limpa outras mensagens de vitória e estatísticas
   const msg = document.getElementById("winnerMessage");
   if (msg) msg.innerHTML = "";
   const post = document.getElementById("postGame");
   if (post) post.hidden = true;
   const statsUl = document.getElementById("moveStats");
   if (statsUl) statsUl.innerHTML = "";
+
+  // Inicia um novo jogo
   startGame();
   if (game && game.initMoveTable) {
     game.initMoveTable();
@@ -340,5 +391,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const resetBtn = document.getElementById("resetBtn");
   if (resetBtn) {
     resetBtn.addEventListener("click", resetGame);
+  }
+
+  // Adiciona eventos para os botões do modal
+  const playAgainBtn = document.getElementById("playAgainBtn");
+  if (playAgainBtn) {
+    playAgainBtn.addEventListener("click", resetGame);
   }
 });
