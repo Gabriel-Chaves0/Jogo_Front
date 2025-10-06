@@ -1,0 +1,169 @@
+/* Reset básico */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Tema escuro minimalista */
+:root{
+  --bg: #0f1115;
+  --panel: #151922;
+  --panel-2: #1b2030;
+  --text: #e6e7ea;
+  --muted: #98a2b3;
+  --accent: #7dd3fc; /* único destaque suave */
+  --edge: #232a3a;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* Container */
+.game-container {
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border: 1px solid var(--edge);
+  border-radius: 16px;
+  padding: 24px;
+  width: min(96vw, 760px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+}
+
+/* Cabeçalho */
+.game-header { margin-bottom: 16px; }
+.game-title {
+  font-size: 1.75rem;
+  letter-spacing: .2px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+.game-status { margin-top: 6px; }
+.current-player { font-weight: 700; color: var(--accent); }
+.instructions {
+  margin-top: 10px;
+  font-size: .95rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+/* Tabuleiros */
+.big-board{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  width: min(92vw, 540px);
+  height: min(92vw, 540px);
+  background: var(--edge);
+  border-radius: 12px;
+  padding: 8px;
+  margin: 12px auto 0;
+}
+
+.small-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 4px;
+  background: #0e1320;
+  border-radius: 8px;
+  padding: 4px;
+  position: relative;
+  transition: box-shadow .2s ease, transform .2s ease, background .2s ease;
+  border: 1px solid #1f2638;
+}
+
+.small-board.active{
+  outline: 2px dashed rgba(125, 211, 252, .25);
+  outline-offset: 2px;
+}
+
+/* Quando um 3x3 for vencido ou empatado */
+.small-board.won{
+  background: #0b0f1a;
+  opacity: 1;
+}
+.small-board.won::after{
+  content: attr(data-winner);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  color: rgba(230,231,234,.12);
+  letter-spacing: 2px;
+}
+
+/* Células */
+.cell{
+  background: #0b0f1a;
+  border: 1px solid #1c2436;
+  border-radius: 6px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  min-height: 52px;
+  transition: transform .09s ease, background .15s ease, border-color .15s ease;
+}
+.cell:hover:not(:disabled){
+  transform: translateY(-1px);
+  border-color: #2a3756;
+}
+.cell:disabled{
+  cursor: not-allowed;
+  opacity: .7;
+}
+
+/* Cores dos símbolos – discretas */
+.cell.x{ color: #fca5a5; } /* vermelho suave */
+.cell.o{ color: #93c5fd; } /* azul suave */
+
+.small-board.won .cell{ opacity: .25; }
+
+/* Controles */
+.controls{ text-align:center; margin-top: 18px; }
+.reset-btn{
+  background: transparent;
+  border: 1px solid var(--edge);
+  color: var(--text);
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, transform .08s ease;
+}
+.reset-btn:hover{
+  background: #111624;
+  border-color: #2a3756;
+  transform: translateY(-1px);
+}
+
+/* Mensagem de vencedor */
+.winner-message{
+  margin-top: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  text-align:center;
+  font-weight: 700;
+}
+
+.winner-draw{ color: var(--muted); }
+
+/* Responsivo */
+@media (max-width: 600px){
+  .game-container{ padding: 18px; }
+  .game-title{ font-size: 1.4rem; }
+  .cell{ min-height: 40px; font-size: 1.05rem; }
+}
