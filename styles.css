@@ -105,6 +105,17 @@ body {
   background: #0b0f1a;
   opacity: 1;
 }
+@keyframes fadeScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .small-board.won::after {
   content: attr(data-winner);
   position: absolute;
@@ -114,6 +125,7 @@ body {
   font-size: clamp(2.2rem, 6vw, 3.5rem);
   font-weight: 800;
   letter-spacing: 2px;
+  animation: fadeScale 0.5s ease-out forwards;
 }
 
 .small-board.won[data-winner="X"]::after {
@@ -152,13 +164,68 @@ body {
   opacity: 0.7;
 }
 
-/* Cores dos símbolos – mais vibrantes */
-.cell.x {
-  color: #ef4444;
-} /* vermelho mais forte */
+/* Animações de traçado para X e O */
+@keyframes drawX-1 {
+  0% {
+    stroke-dashoffset: 42;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawX-2 {
+  0% {
+    stroke-dashoffset: 42;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes drawO {
+  from {
+    stroke-dashoffset: 150;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.cell.x,
 .cell.o {
-  color: #3b82f6;
-} /* azul mais forte */
+  display: grid;
+  place-items: center;
+}
+
+.cell svg {
+  width: 28px;
+  height: 28px;
+}
+
+.cell.x svg line {
+  stroke: #ef4444; /* vermelho mais forte */
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 42;
+}
+
+.cell.x svg line:first-child {
+  animation: drawX-1 0.4s ease-out forwards;
+}
+
+.cell.x svg line:last-child {
+  animation: drawX-2 0.4s 0.3s ease-out forwards;
+}
+
+.cell.o svg circle {
+  stroke: #3b82f6; /* azul mais forte */
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 150;
+  animation: drawO 0.7s ease-out forwards;
+}
 
 .small-board.won .cell {
   opacity: 0.3;
@@ -187,6 +254,17 @@ body {
 }
 
 /* Mensagem de vencedor */
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .winner-message {
   margin-top: 12px;
   padding: 10px 14px;
@@ -194,6 +272,7 @@ body {
   border-radius: 10px;
   text-align: center;
   font-weight: 700;
+  animation: slideDown 0.4s ease-out forwards;
 }
 
 .winner-draw {
