@@ -1,8 +1,12 @@
 /* Reset básico */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* Tema escuro minimalista */
-:root{
+:root {
   --bg: #0f1115;
   --panel: #151922;
   --panel-2: #1b2030;
@@ -12,12 +16,15 @@
   --edge: #232a3a;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
 body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+    "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
   background: var(--bg);
   color: var(--text);
   display: flex;
@@ -33,38 +40,46 @@ body {
   border-radius: 16px;
   padding: 24px;
   width: min(96vw, 760px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* Cabeçalho */
-.game-header { margin-bottom: 16px; }
+.game-header {
+  margin-bottom: 16px;
+}
 .game-title {
   font-size: 1.75rem;
-  letter-spacing: .2px;
+  letter-spacing: 0.2px;
   font-weight: 650;
   line-height: 1.2;
 }
-.game-status { margin-top: 6px; }
-.current-player { font-weight: 700; color: var(--accent); }
+.game-status {
+  margin-top: 6px;
+}
+.current-player {
+  font-weight: 700;
+  color: var(--accent);
+}
 .instructions {
   margin-top: 10px;
-  font-size: .95rem;
+  font-size: 0.95rem;
   color: var(--muted);
   line-height: 1.45;
 }
 
 /* Tabuleiros */
-.big-board{
+.big-board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
-  gap: 8px;
-  width: min(92vw, 540px);
-  height: min(92vw, 540px);
+  gap: 10px;
+  width: 100%;
+  height: min(92vw, 480px);
+  max-width: 480px;
   background: var(--edge);
   border-radius: 12px;
-  padding: 8px;
-  margin: 12px auto 0;
+  padding: 10px;
+  margin: 0 auto;
 }
 
 .small-board {
@@ -76,21 +91,21 @@ body {
   border-radius: 8px;
   padding: 4px;
   position: relative;
-  transition: box-shadow .2s ease, transform .2s ease, background .2s ease;
+  transition: box-shadow 0.2s ease, transform 0.2s ease, background 0.2s ease;
   border: 1px solid #1f2638;
 }
 
-.small-board.active{
-  outline: 2px dashed rgba(125, 211, 252, .25);
+.small-board.active {
+  outline: 2px dashed rgba(125, 211, 252, 0.25);
   outline-offset: 2px;
 }
 
 /* Quando um 3x3 for vencido ou empatado */
-.small-board.won{
+.small-board.won {
   background: #0b0f1a;
   opacity: 1;
 }
-.small-board.won::after{
+.small-board.won::after {
   content: attr(data-winner);
   position: absolute;
   inset: 0;
@@ -98,12 +113,12 @@ body {
   place-items: center;
   font-size: clamp(2.2rem, 6vw, 3.5rem);
   font-weight: 800;
-  color: rgba(230,231,234,.12);
+  color: rgba(230, 231, 234, 0.12);
   letter-spacing: 2px;
 }
 
 /* Células */
-.cell{
+.cell {
   background: #0b0f1a;
   border: 1px solid #1c2436;
   border-radius: 6px;
@@ -113,27 +128,37 @@ body {
   cursor: pointer;
   display: grid;
   place-items: center;
-  min-height: 52px;
-  transition: transform .09s ease, background .15s ease, border-color .15s ease;
+  min-height: 40px;
+  transition: transform 0.09s ease, background 0.15s ease,
+    border-color 0.15s ease;
 }
-.cell:hover:not(:disabled){
+.cell:hover:not(:disabled) {
   transform: translateY(-1px);
   border-color: #2a3756;
 }
-.cell:disabled{
+.cell:disabled {
   cursor: not-allowed;
-  opacity: .7;
+  opacity: 0.7;
 }
 
 /* Cores dos símbolos – discretas */
-.cell.x{ color: #fca5a5; } /* vermelho suave */
-.cell.o{ color: #93c5fd; } /* azul suave */
+.cell.x {
+  color: #fca5a5;
+} /* vermelho suave */
+.cell.o {
+  color: #93c5fd;
+} /* azul suave */
 
-.small-board.won .cell{ opacity: .25; }
+.small-board.won .cell {
+  opacity: 0.25;
+}
 
 /* Controles */
-.controls{ text-align:center; margin-top: 18px; }
-.reset-btn{
+.controls {
+  text-align: center;
+  margin-top: 18px;
+}
+.reset-btn {
   background: transparent;
   border: 1px solid var(--edge);
   color: var(--text);
@@ -141,33 +166,42 @@ body {
   border-radius: 999px;
   font-weight: 600;
   cursor: pointer;
-  transition: background .15s ease, border-color .15s ease, transform .08s ease;
+  transition: background 0.15s ease, border-color 0.15s ease,
+    transform 0.08s ease;
 }
-.reset-btn:hover{
+.reset-btn:hover {
   background: #111624;
   border-color: #2a3756;
   transform: translateY(-1px);
 }
 
 /* Mensagem de vencedor */
-.winner-message{
+.winner-message {
   margin-top: 12px;
   padding: 10px 14px;
   border: 1px solid var(--edge);
   border-radius: 10px;
-  text-align:center;
+  text-align: center;
   font-weight: 700;
 }
 
-.winner-draw{ color: var(--muted); }
-
-/* Responsivo */
-@media (max-width: 600px){
-  .game-container{ padding: 18px; }
-  .game-title{ font-size: 1.4rem; }
-  .cell{ min-height: 40px; font-size: 1.05rem; }
+.winner-draw {
+  color: var(--muted);
 }
 
+/* Responsivo */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 18px;
+  }
+  .game-title {
+    font-size: 1.4rem;
+  }
+  .cell {
+    min-height: 40px;
+    font-size: 1.05rem;
+  }
+}
 
 /* --- Config form --- */
 .form-box {
@@ -177,75 +211,127 @@ body {
   border-radius: 12px;
   padding: 16px;
 }
-.form-row { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
-.form-row label { font-weight:600; font-size:.95rem; color:#c8cbd3; }
-.form-row input {
-  background:#0b0f1a;
-  color:#e6e7ea;
-  border:1px solid #1c2436;
-  border-radius:8px;
-  padding:10px 12px;
-  outline:none;
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
 }
-.form-row input:focus { border-color:#2a3756; }
+.form-row label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #c8cbd3;
+}
+.form-row input {
+  background: #0b0f1a;
+  color: #e6e7ea;
+  border: 1px solid #1c2436;
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+}
+.form-row input:focus {
+  border-color: #2a3756;
+}
 
-.link-like { text-decoration:none; }
+.link-like {
+  text-decoration: none;
+}
 
 /* Players inline */
 .players-inline {
-  display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
 }
 .pill {
-  background:#0b0f1a;
-  border:1px solid #1c2436;
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:.9rem;
-  color:#98a2b3;
+  background: #0b0f1a;
+  border: 1px solid #1c2436;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 0.9rem;
+  color: #98a2b3;
 }
 
 /* --- Post-game stats --- */
-.postgame { 
-  margin-top: 16px; 
-  background:#0e1320; 
-  border:1px solid #1f2638; 
-  border-radius:12px; 
-  padding:14px; 
+.postgame {
+  margin-top: 16px;
+  background: #0e1320;
+  border: 1px solid #1f2638;
+  border-radius: 12px;
+  padding: 14px;
 }
-.section-title { font-size:1.1rem; margin-bottom:8px; }
-.winner-line { margin-bottom:10px; font-weight:700; }
-.stats-list { list-style: disc; margin-left:18px; display:flex; flex-direction:column; gap:4px; }
-.stats-item { color:#c8cbd3; }
-
+.section-title {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+.winner-line {
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+.stats-list {
+  list-style: disc;
+  margin-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.stats-item {
+  color: #c8cbd3;
+}
 
 /* --- Two-column layout --- */
 .main-grid {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 14px;
+  display: flex;
+  gap: 20px;
   align-items: start;
   margin-top: 10px;
-}
-@media (max-width: 800px){
-  .main-grid { grid-template-columns: 1fr; }
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-.sidebar-col .stats-card{
-  background:#0e1320;
-  border:1px solid #1f2638;
-  border-radius:12px;
-  padding:12px;
+.board-col {
+  flex: 2;
+  min-width: 400px;
+}
+
+.sidebar-col {
+  width: 230px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 800px) {
+  .main-grid {
+    flex-direction: column;
+  }
+  .sidebar-col {
+    width: 100%;
+  }
+}
+
+.sidebar-col .stats-card {
+  background: #0e1320;
+  border: 1px solid #1f2638;
+  border-radius: 12px;
+  padding: 12px;
+  width: 100%;
 }
 
 .stats-table {
-  width:100%;
+  width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin-top: 8px;
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
-.stats-table th, .stats-table td{
-  border:1px solid #1f2638;
-  padding:6px 8px;
-  text-align:center;
+.stats-table th,
+.stats-table td {
+  border: 1px solid #1f2638;
+  padding: 6px 4px;
+  text-align: center;
+  overflow: hidden;
 }
-.stats-table th { font-weight:700; }
+.stats-table th {
+  font-weight: 700;
+}
