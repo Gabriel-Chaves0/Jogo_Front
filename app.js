@@ -6,6 +6,7 @@ class UltimateTicTacToe {
         this.smallBoards = Array(9).fill(null).map(() => Array(9).fill(null));
         this.activeBoard = null;
         this.gameWon = false;
+        this.moveCounts = { X: Array(9).fill(0), O: Array(9).fill(0) };
         this.initializeGame();
     }
 
@@ -16,6 +17,69 @@ getPlayerNames() {
     return { x, o };
 }
 
+
+    
+    renderStats(finalWinner) {
+        const statsUl = document.getElementById('moveStats');
+        const post = document.getElementById('postGame');
+        const wline = document.getElementById('winnerLine');
+        if (!statsUl || !post) return;
+
+        // Limpa lista
+        statsUl.innerHTML = '';
+
+        // Cabeçalho do vencedor
+        const names = this.names || { x: 'Jogador X', o: 'Jogador O' };
+        const winnerText = (finalWinner === 'DRAW')
+            ? '🤝 Empate geral'
+            : `🏆 Vencedor: ${finalWinner === 'X' ? names.x : names.o} (${finalWinner})`;
+        if (wline) wline.textContent = winnerText;
+
+        // Gera itens 1..9
+        for (let i = 0; i < 9; i++) {
+            const li = document.createElement('li');
+            li.className = 'stats-item';
+            const xCount = this.moveCounts['X'][i];
+            const oCount = this.moveCounts['O'][i];
+            li.textContent = `Sub-tabuleiro ${i+1}: X = ${xCount}, O = ${oCount}`;
+            statsUl.appendChild(li);
+        }
+
+        // Mostra bloco
+        post.hidden = false;
+    }
+
+
+    initMoveTable() {
+        const tbody = document.querySelector('#moveTable tbody');
+        if (!tbody) return;
+        tbody.innerHTML = '';
+        for (let i = 0; i < 9; i++) {
+            const tr = document.createElement('tr');
+            tr.setAttribute('data-index', String(i));
+            const tdIdx = document.createElement('td');
+            tdIdx.textContent = String(i + 1);
+            const tdX = document.createElement('td');
+            tdX.className = 'cell-x';
+            tdX.textContent = '0';
+            const tdO = document.createElement('td');
+            tdO.className = 'cell-o';
+            tdO.textContent = '0';
+            tr.appendChild(tdIdx);
+            tr.appendChild(tdX);
+            tr.appendChild(tdO);
+            tbody.appendChild(tr);
+        }
+    }
+
+    updateMoveTableCell(boardIndex) {
+        const row = document.querySelector(`#moveTable tbody tr[data-index="${boardIndex}"]`);
+        if (!row) return;
+        const tdX = row.querySelector('.cell-x');
+        const tdO = row.querySelector('.cell-o');
+        if (tdX) tdX.textContent = String(this.moveCounts['X'][boardIndex]);
+        if (tdO) tdO.textContent = String(this.moveCounts['O'][boardIndex]);
+    }
 
     initializeGame() {
         const bigBoardElement = document.getElementById('bigBoard');
@@ -52,6 +116,11 @@ getPlayerNames() {
         cellEl.textContent = this.currentPlayer;
         cellEl.classList.add(this.currentPlayer.toLowerCase());
 
+        // contabiliza jogada no sub-tabuleiro
+        this.moveCounts[this.currentPlayer][boardIndex]++;
+        // atualiza a tabela dinâmica
+        this.updateMoveTableCell(boardIndex);
+
         // Verifica vencedor/empate do small board
         const result = this.checkSmallBoardWinner(boardIndex);
         if (result) {
@@ -73,6 +142,7 @@ getPlayerNames() {
         if (gameWinner) {
             this.gameWon = true;
             this.showWinner(gameWinner);
+            this.renderStats(gameWinner);
             return;
         }
 
@@ -184,7 +254,13 @@ function startGame() { game = new UltimateTicTacToe(); }
 function resetGame() {
     const msg = document.getElementById('winnerMessage');
     if (msg) msg.innerHTML = '';
+    const post = document.getElementById('postGame');
+    if (post) post.hidden = true;
+    const statsUl = document.getElementById('moveStats');
+    if (statsUl) statsUl.innerHTML = '';
     startGame();
+    if (game && game.initMoveTable) { game.initMoveTable(); }
+    if (game && game.initMoveTable) { game.initMoveTable(); }
 const inline = document.getElementById('playersInline');
 if (inline) {
     inline.innerHTML = `<div class="pill">X — ${game.names.x}</div><div class="pill">O — ${game.names.o}</div>`;
@@ -201,6 +277,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     startGame();
+    if (game && game.initMoveTable) { game.initMoveTable(); }
+    if (game && game.initMoveTable) { game.initMoveTable(); }
 const inline = document.getElementById('playersInline');
 if (inline) {
     inline.innerHTML = `<div class="pill">X — ${game.names.x}</div><div class="pill">O — ${game.names.o}</div>`;

@@ -24,7 +24,37 @@
 
         <div class="players-inline" id="playersInline"></div>
 
-        <div class="big-board" id="bigBoard"></div>
+        
+        <div class="main-grid">
+          <div class="board-col">
+            <div class="big-board" id="bigBoard"></div>
+          </div>
+          <aside class="sidebar-col">
+            <div class="stats-card">
+              <h3 class="section-title">Contagem de jogadas por sub-tabuleiro (1–9)</h3>
+              <table id="moveTable" class="stats-table">
+                <thead>
+                  <tr><th>#</th><th>X</th><th>O</th></tr>
+                </thead>
+                <tbody>
+                  <!-- rows 1..9 via JS -->
+                </tbody>
+              </table>
+            </div>
+          </aside>
+        </div>
+        
+        <div class="postgame" id="postGame" hidden>
+            <h2 class="section-title">Resultado</h2>
+            <div id="winnerLine" class="winner-line"></div>
+            <div class="scoreboards">
+                <div class="stats-block">
+                    <h3>Contagem de jogadas por sub-tabuleiro (1–9)</h3>
+                    <ul id="moveStats" class="stats-list"></ul>
+                </div>
+            </div>
+        </div>
+
 
         <div class="controls">
             <button class="reset-btn" id="resetBtn">Novo Jogo</button>

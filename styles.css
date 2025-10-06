@@ -203,3 +203,49 @@ body {
   font-size:.9rem;
   color:#98a2b3;
 }
+
+/* --- Post-game stats --- */
+.postgame { 
+  margin-top: 16px; 
+  background:#0e1320; 
+  border:1px solid #1f2638; 
+  border-radius:12px; 
+  padding:14px; 
+}
+.section-title { font-size:1.1rem; margin-bottom:8px; }
+.winner-line { margin-bottom:10px; font-weight:700; }
+.stats-list { list-style: disc; margin-left:18px; display:flex; flex-direction:column; gap:4px; }
+.stats-item { color:#c8cbd3; }
+
+
+/* --- Two-column layout --- */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 14px;
+  align-items: start;
+  margin-top: 10px;
+}
+@media (max-width: 800px){
+  .main-grid { grid-template-columns: 1fr; }
+}
+
+.sidebar-col .stats-card{
+  background:#0e1320;
+  border:1px solid #1f2638;
+  border-radius:12px;
+  padding:12px;
+}
+
+.stats-table {
+  width:100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: .95rem;
+}
+.stats-table th, .stats-table td{
+  border:1px solid #1f2638;
+  padding:6px 8px;
+  text-align:center;
+}
+.stats-table th { font-weight:700; }
